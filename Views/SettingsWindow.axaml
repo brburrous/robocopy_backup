@@ -2,96 +2,189 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="550"
+        mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="720"
         x:Class="NasBackupApp.Views.SettingsWindow"
-        Title="Backup Configuration Settings"
-        Width="700" Height="550"
-        WindowStartupLocation="CenterOwner">
-    
-    <Grid Margin="20">
+        Title="Configuration Settings"
+        Width="640" Height="720"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}">
+
+    <Grid Margin="40,32">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Configuration Selector -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,32">
+            <TextBlock Classes="HeaderLarge" Text="Settings" Margin="0,0,0,8"/>
+            <TextBlock Classes="SecondaryText"
+                       Text="Manage your backup configurations"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- Configuration Selector Card -->
+        <Border Grid.Row="1"
+                Classes="CardStyle"
+                Margin="0,0,0,24"
+                Padding="20">
+            <StackPanel Spacing="16">
+                <TextBlock Classes="LabelText" Text="CONFIGURATION"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Name="ConfigurationComboBox"
+                              Grid.Column="0"
+                              Classes="ModernComboBox"
+                              Margin="0,0,12,0"
+                              MinWidth="200"/>
+
+                    <Button Name="NewConfigButton"
+                            Grid.Column="1"
+                            Classes="SecondaryButton"
+                            Content="New"
+                            Padding="14,10"
+                            MinWidth="70"
+                            Margin="0,0,8,0"/>
+
+                    <Button Name="SaveConfigButton"
+                            Grid.Column="2"
+                            Classes="PrimaryButton"
+                            Content="Save"
+                            Padding="14,10"
+                            MinWidth="70"
+                            Margin="0,0,8,0"/>
+
+                    <Button Name="DeleteConfigButton"
+                            Grid.Column="3"
+                            Classes="DangerButton"
+                            Content="Delete"
+                            Padding="14,10"
+                            MinWidth="70"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Configuration Form Card -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <Border Classes="CardStyle" Padding="24">
+                <StackPanel Spacing="24">
+                    <TextBlock Classes="HeaderSmall" Text="Backup Configuration" Margin="0,0,0,-8"/>
+
+                    <!-- Configuration Name -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="LabelText" Text="CONFIGURATION NAME"/>
+                        <TextBox Name="ConfigNameTextBox"
+                                 Classes="ModernTextBox"
+                                 Watermark="Enter a name for this configuration"/>
+                    </StackPanel>
+
+                    <!-- NAS Address -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="LabelText" Text="NAS ADDRESS"/>
+                        <TextBox Name="NasAddressTextBox"
+                                 Classes="ModernTextBox"
+                                 Watermark="e.g., 192.168.1.100 or nas.local"/>
+                    </StackPanel>
+
+                    <!-- Share Name -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="LabelText" Text="SHARE NAME"/>
+                        <TextBox Name="ShareNameTextBox"
+                                 Classes="ModernTextBox"
+                                 Watermark="e.g., Backups or Storage"/>
+                    </StackPanel>
+
+                    <!-- Source Path -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="LabelText" Text="SOURCE PATH"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="SourcePathTextBox"
+                                     Grid.Column="0"
+                                     Classes="ModernTextBox"
+                                     Margin="0,0,12,0"
+                                     Watermark="Select the folder to backup..."/>
+                            <Button Name="BrowseSourceButton"
+                                    Grid.Column="1"
+                                    Classes="SecondaryButton"
+                                    Content="Browse"
+                                    Padding="16,10"
+                                    MinWidth="90"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Archive Path -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="LabelText" Text="ARCHIVE PATH"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="ArchivePathTextBox"
+                                     Grid.Column="0"
+                                     Classes="ModernTextBox"
+                                     Margin="0,0,12,0"
+                                     Watermark="Select where to store the backup..."/>
+                            <Button Name="BrowseArchiveButton"
+                                    Grid.Column="1"
+                                    Classes="SecondaryButton"
+                                    Content="Browse"
+                                    Padding="16,10"
+                                    MinWidth="90"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Compress Data Option -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="LabelText" Text="OPTIONS"/>
+                        <StackPanel Spacing="8">
+                            <CheckBox Name="CompressDataCheckBox"
+                                      Classes="ModernCheckBox"
+                                      Content="Compress data during backup"/>
+                            <TextBlock Classes="SecondaryText"
+                                       Text="Compresses files to save storage space (may increase backup time)"
+                                       Margin="28,0,0,0"
+                                       TextWrapping="Wrap"
+                                       FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+
+        <!-- Bottom Action Buttons -->
+        <Grid Grid.Row="3" Margin="0,24,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Configuration:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <ComboBox Name="ConfigurationComboBox" Grid.Column="1" MinWidth="200" Margin="0,0,10,0"/>
-            <Button Name="NewConfigButton" Grid.Column="2" Content="New" Width="80" Margin="0,0,5,0"/>
-            <Button Name="SaveConfigButton" Grid.Column="3" Content="Save" Width="80" Margin="0,0,5,0"/>
-            <Button Name="DeleteConfigButton" Grid.Column="4" Content="Delete" Width="80"/>
+            <Button Name="CloseButton"
+                    Grid.Column="1"
+                    Classes="SecondaryButton"
+                    Content="Close"
+                    MinWidth="100"
+                    Margin="0,0,12,0"/>
+
+            <Button Name="ApplyButton"
+                    Grid.Column="2"
+                    Classes="PrimaryButton"
+                    Content="Apply"
+                    MinWidth="100"/>
         </Grid>
-
-        <!-- Configuration Form -->
-        <ScrollViewer Grid.Row="1">
-            <StackPanel>
-                <!-- Configuration Name -->
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Configuration Name:" Margin="0,0,0,5" FontWeight="Bold"/>
-                    <TextBox Name="ConfigNameTextBox" Watermark="Enter configuration name"/>
-                </StackPanel>
-
-                <!-- NAS Address -->
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="NAS Address:" Margin="0,0,0,5"/>
-                    <TextBox Name="NasAddressTextBox" Watermark="e.g., 192.168.1.100"/>
-                </StackPanel>
-
-                <!-- Share Name -->
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Share Name:" Margin="0,0,0,5"/>
-                    <TextBox Name="ShareNameTextBox" Watermark="e.g., Backups"/>
-                </StackPanel>
-
-                <!-- Source Path -->
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Source Path:" Margin="0,0,0,5"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Name="SourcePathTextBox" Grid.Column="0" Margin="0,0,5,0" Watermark="Select source directory..."/>
-                        <Button Name="BrowseSourceButton" Grid.Column="1" Content="Browse..." Width="80"/>
-                    </Grid>
-                </StackPanel>
-
-                <!-- Archive Path -->
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Archive Path:" Margin="0,0,0,5"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Name="ArchivePathTextBox" Grid.Column="0" Margin="0,0,5,0" Watermark="Select archive directory..."/>
-                        <Button Name="BrowseArchiveButton" Grid.Column="1" Content="Browse..." Width="80"/>
-                    </Grid>
-                </StackPanel>
-
-                <!-- Compress Data Checkbox -->
-                <StackPanel Margin="0,0,0,15">
-                    <CheckBox Name="CompressDataCheckBox" Content="Compress data during backup" Margin="0,5,0,0"/>
-                    <TextBlock Text="Enable this option to compress files during the backup process (requires PowerShell script support)" 
-                               FontSize="11" Foreground="Gray" Margin="25,5,0,0" TextWrapping="Wrap"/>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
-
-        <!-- Bottom Buttons -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button Name="ApplyButton" Content="Apply" Width="100" Margin="0,0,10,0"/>
-            <Button Name="CloseButton" Content="Close" Width="100"/>
-        </StackPanel>
     </Grid>
 </Window>

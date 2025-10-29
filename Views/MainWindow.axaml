@@ -2,12 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="920" d:DesignHeight="680"
         x:Class="NasBackupApp.Views.MainWindow"
-        Title="NAS Backup Tool"
-        Width="800" Height="500">
-    
-    <Grid Margin="20">
+        Title="Backup Manager"
+        Width="920" Height="680"
+        Background="{StaticResource BackgroundBrush}">
+
+    <Grid Margin="40,32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,52 +17,105 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Top Bar with Settings -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
+        <!-- Header Section -->
+        <Grid Grid.Row="0" Margin="0,0,0,32">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
-            <TextBlock Grid.Column="0" Text="Current Configuration:" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
-            <TextBlock Name="CurrentConfigTextBlock" Grid.Column="1" Text="None" VerticalAlignment="Center" FontStyle="Italic"/>
-            <Button Name="SettingsButton" Grid.Column="2" Content="⚙ Settings" Width="120"/>
+
+            <!-- App Title and Current Config -->
+            <StackPanel Grid.Column="0" Spacing="4">
+                <TextBlock Classes="HeaderLarge" Text="Backup Manager"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Classes="SecondaryText" Text="Configuration:" VerticalAlignment="Center"/>
+                    <TextBlock Name="CurrentConfigTextBlock"
+                               Classes="BodyText"
+                               Text="None"
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Settings Button -->
+            <Button Name="SettingsButton"
+                    Grid.Column="1"
+                    Classes="IconButton"
+                    VerticalAlignment="Top"
+                    Padding="16,10">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="⚙" FontSize="16" VerticalAlignment="Center"/>
+                    <TextBlock Text="Settings" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
-        <!-- Configuration Status -->
-        <Border Grid.Row="1" Background="#F0F0F0" Padding="15" Margin="0,0,0,15" CornerRadius="5">
-            <StackPanel>
-                <TextBlock Name="ConfigStatusTextBlock" Text="No configuration loaded. Click Settings to create or load a configuration." 
-                           TextWrapping="Wrap" FontSize="12"/>
+        <!-- Configuration Status Card -->
+        <Border Grid.Row="1"
+                Classes="CardStyle"
+                Margin="0,0,0,24"
+                Padding="24,20">
+            <StackPanel Spacing="12">
+                <TextBlock Classes="HeaderSmall" Text="Status" Margin="0,0,0,4"/>
+                <TextBlock Name="ConfigStatusTextBlock"
+                           Classes="SecondaryText"
+                           Text="No configuration loaded. Click Settings to create or load a configuration."
+                           TextWrapping="Wrap"
+                           LineHeight="20"/>
             </StackPanel>
         </Border>
-        
-        <!-- Start Backup Button with Compress Option -->
-        <StackPanel Grid.Row="2" Margin="0,0,0,15">
-            <Button Name="StartBackupButton" Content="Start Backup" 
-                    HorizontalAlignment="Stretch" Height="45" 
-                    Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold"
-                    IsEnabled="False"/>
-            <CheckBox Name="CompressDataCheckBox" Content="Compress data during backup" 
-                      Margin="5,8,0,0" IsEnabled="False"/>
+
+        <!-- Backup Controls Card -->
+        <Border Grid.Row="2"
+                Classes="CardStyle"
+                Margin="0,0,0,24"
+                Padding="24">
+            <StackPanel Spacing="16">
+                <TextBlock Classes="HeaderSmall" Text="Backup Controls" Margin="0,0,0,4"/>
+
+                <!-- Start Backup Button -->
+                <Button Name="StartBackupButton"
+                        Classes="SuccessButton"
+                        HorizontalAlignment="Stretch"
+                        Height="52"
+                        IsEnabled="False">
+                    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                        <TextBlock Text="▶" FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="Start Backup" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Compress Option -->
+                <CheckBox Name="CompressDataCheckBox"
+                          Classes="ModernCheckBox"
+                          Content="Compress data during backup"
+                          IsEnabled="False"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Log Section -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,12">
+            <TextBlock Classes="HeaderSmall" Text="Activity Log"/>
         </StackPanel>
-        
-        <!-- Console/Log Section -->
-        <StackPanel Grid.Row="3" Margin="0,0,0,5">
-            <TextBlock Text="Backup Log:" FontWeight="Bold"/>
-        </StackPanel>
-        
-        <Border Grid.Row="4" BorderBrush="Gray" BorderThickness="1" Background="#F5F5F5">
-            <ScrollViewer Name="LogScrollViewer" VerticalScrollBarVisibility="Auto">
-                <TextBox Name="LogTextBox" 
-                         IsReadOnly="True" 
+
+        <!-- Log Console Card -->
+        <Border Grid.Row="4"
+                Classes="CardStyle"
+                Padding="0"
+                ClipToBounds="True">
+            <ScrollViewer Name="LogScrollViewer"
+                          VerticalScrollBarVisibility="Auto"
+                          Padding="20">
+                <TextBox Name="LogTextBox"
+                         IsReadOnly="True"
                          Background="Transparent"
                          BorderThickness="0"
                          TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         FontFamily="Consolas,Courier New,monospace"
-                         Padding="5"/>
+                         FontFamily="JetBrains Mono, Consolas, Courier New, monospace"
+                         FontSize="13"
+                         Foreground="{StaticResource TextSecondaryBrush}"
+                         Padding="0"/>
             </ScrollViewer>
         </Border>
     </Grid>
