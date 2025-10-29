@@ -208,11 +208,43 @@ namespace NasBackupApp.Views
             return null;
         }
 
-        private void ApplyButton_Click(object? sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object? sender, RoutedEventArgs e)
         {
             var config = GetConfigurationFromForm();
-            ConfigurationApplied?.Invoke(this, config);
-            Close();
+
+            if (string.IsNullOrWhiteSpace(config.Name))
+            {
+                await ShowMessageAsync("Error", "Configuration name cannot be empty.");
+                return;
+            }
+
+            try
+            {
+                // Save the configuration to disk
+                // Check if renaming existing configuration
+                if (_currentConfiguration != null && _currentConfiguration.Name != config.Name)
+                {
+                    // Remove old configuration
+                    _configurations.RemoveAll(c => c.Name == _currentConfiguration.Name);
+                }
+                else
+                {
+                    // Remove existing configuration with same name
+                    _configurations.RemoveAll(c => c.Name == config.Name);
+                }
+
+                _configurations.Add(config);
+                _configManager.SaveConfigurations(_configurations);
+                _currentConfiguration = config;
+
+                // Apply the configuration to the main window
+                ConfigurationApplied?.Invoke(this, config);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                await ShowMessageAsync("Error", $"Failed to save configuration: {ex.Message}");
+            }
         }
 
         private void CloseButton_Click(object? sender, RoutedEventArgs e)

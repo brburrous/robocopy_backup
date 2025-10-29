@@ -5,6 +5,7 @@ using NasBackupApp.Services;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NasBackupApp.Views
@@ -33,7 +34,19 @@ namespace NasBackupApp.Views
             var configurations = _configManager.LoadConfigurations();
             if (configurations.Count > 0)
             {
-                _currentConfiguration = configurations[0];
+                // Try to load the last used configuration
+                var lastConfigName = _configManager.LoadLastConfiguration();
+                if (!string.IsNullOrEmpty(lastConfigName))
+                {
+                    _currentConfiguration = configurations.FirstOrDefault(c => c.Name == lastConfigName);
+                }
+
+                // If not found, use the first one
+                if (_currentConfiguration == null)
+                {
+                    _currentConfiguration = configurations[0];
+                }
+
                 UpdateConfigurationDisplay();
             }
         }
@@ -49,6 +62,7 @@ namespace NasBackupApp.Views
         {
             _currentConfiguration = config;
             UpdateConfigurationDisplay();
+            _configManager.SaveLastConfiguration(config.Name);
             AppendLog($"Configuration '{config.Name}' loaded successfully.");
         }
 

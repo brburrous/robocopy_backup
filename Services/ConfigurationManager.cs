@@ -11,6 +11,7 @@ namespace NasBackupApp.Services
     {
         private readonly string _configDirectory;
         private readonly string _configurationsFile;
+        private readonly string _lastConfigFile;
 
         public ConfigurationManager()
         {
@@ -19,6 +20,7 @@ namespace NasBackupApp.Services
                 "NasBackupApp"
             );
             _configurationsFile = Path.Combine(_configDirectory, "configurations.json");
+            _lastConfigFile = Path.Combine(_configDirectory, "last_config.txt");
 
             // Ensure directory exists
             if (!Directory.Exists(_configDirectory))
@@ -90,6 +92,34 @@ namespace NasBackupApp.Services
                 allConfigurations.Remove(config);
                 SaveConfigurations(allConfigurations);
             }
+        }
+
+        public void SaveLastConfiguration(string configName)
+        {
+            try
+            {
+                File.WriteAllText(_lastConfigFile, configName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving last configuration: {ex.Message}");
+            }
+        }
+
+        public string? LoadLastConfiguration()
+        {
+            try
+            {
+                if (File.Exists(_lastConfigFile))
+                {
+                    return File.ReadAllText(_lastConfigFile).Trim();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading last configuration: {ex.Message}");
+            }
+            return null;
         }
     }
 }
