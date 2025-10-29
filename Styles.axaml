@@ -1,43 +1,46 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Modern Color Palette inspired by Apple, Notion, and Red Antler -->
-    <Color x:Key="PrimaryColor">#5B7FFF</Color>
-    <Color x:Key="PrimaryHoverColor">#4A6EEE</Color>
-    <Color x:Key="SuccessColor">#00C48C</Color>
-    <Color x:Key="SuccessHoverColor">#00B37D</Color>
-    <Color x:Key="DangerColor">#FF6B6B</Color>
-    <Color x:Key="DangerHoverColor">#EE5A5A</Color>
+    <!-- Resources Section -->
+    <Styles.Resources>
+        <!-- Modern Color Palette inspired by Apple, Notion, and Red Antler -->
+        <Color x:Key="PrimaryColor">#5B7FFF</Color>
+        <Color x:Key="PrimaryHoverColor">#4A6EEE</Color>
+        <Color x:Key="SuccessColor">#00C48C</Color>
+        <Color x:Key="SuccessHoverColor">#00B37D</Color>
+        <Color x:Key="DangerColor">#FF6B6B</Color>
+        <Color x:Key="DangerHoverColor">#EE5A5A</Color>
 
-    <Color x:Key="BackgroundColor">#FAFAFA</Color>
-    <Color x:Key="SurfaceColor">#FFFFFF</Color>
-    <Color x:Key="BorderColor">#E8E8E8</Color>
+        <Color x:Key="BackgroundColor">#FAFAFA</Color>
+        <Color x:Key="SurfaceColor">#FFFFFF</Color>
+        <Color x:Key="BorderColor">#E8E8E8</Color>
 
-    <Color x:Key="TextPrimaryColor">#1A1A1A</Color>
-    <Color x:Key="TextSecondaryColor">#6B7280</Color>
-    <Color x:Key="TextTertiaryColor">#9CA3AF</Color>
+        <Color x:Key="TextPrimaryColor">#1A1A1A</Color>
+        <Color x:Key="TextSecondaryColor">#6B7280</Color>
+        <Color x:Key="TextTertiaryColor">#9CA3AF</Color>
 
-    <!-- Brushes -->
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
-    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
-    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
-    <SolidColorBrush x:Key="SuccessHoverBrush" Color="{StaticResource SuccessHoverColor}" />
-    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
-    <SolidColorBrush x:Key="DangerHoverBrush" Color="{StaticResource DangerHoverColor}" />
+        <!-- Brushes -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+        <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
+        <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+        <SolidColorBrush x:Key="SuccessHoverBrush" Color="{StaticResource SuccessHoverColor}" />
+        <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
+        <SolidColorBrush x:Key="DangerHoverBrush" Color="{StaticResource DangerHoverColor}" />
 
-    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
-    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
-    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+        <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+        <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
+        <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
 
-    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}" />
-    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
-    <SolidColorBrush x:Key="TextTertiaryBrush" Color="{StaticResource TextTertiaryColor}" />
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}" />
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
+        <SolidColorBrush x:Key="TextTertiaryBrush" Color="{StaticResource TextTertiaryColor}" />
 
-    <!-- Typography Styles -->
-    <FontFamily x:Key="PrimaryFont">Inter, SF Pro Display, -apple-system, BlinkMacSystemFont, avares://NasBackupApp/Assets#Inter</FontFamily>
+        <!-- Typography -->
+        <FontFamily x:Key="PrimaryFont">Inter, SF Pro Display, -apple-system, BlinkMacSystemFont, avares://NasBackupApp/Assets#Inter</FontFamily>
+    </Styles.Resources>
 
     <!-- Card Style with modern shadow and border -->
-    <Style x:Key="CardStyle" Selector="Border">
+    <Style Selector="Border.CardStyle">
         <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -47,7 +50,7 @@
     </Style>
 
     <!-- Primary Button Style -->
-    <Style x:Key="PrimaryButton" Selector="Button">
+    <Style Selector="Button.PrimaryButton">
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderThickness" Value="0" />
@@ -65,17 +68,17 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PrimaryButton" Selector="Button:pointerover">
+    <Style Selector="Button.PrimaryButton:pointerover">
         <Setter Property="Background" Value="{StaticResource PrimaryHoverBrush}" />
     </Style>
 
-    <Style x:Key="PrimaryButton" Selector="Button:disabled">
+    <Style Selector="Button.PrimaryButton:disabled">
         <Setter Property="Opacity" Value="0.4" />
         <Setter Property="Cursor" Value="Arrow" />
     </Style>
 
     <!-- Success Button Style -->
-    <Style x:Key="SuccessButton" Selector="Button">
+    <Style Selector="Button.SuccessButton">
         <Setter Property="Background" Value="{StaticResource SuccessBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderThickness" Value="0" />
@@ -88,17 +91,17 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="SuccessButton" Selector="Button:pointerover">
+    <Style Selector="Button.SuccessButton:pointerover">
         <Setter Property="Background" Value="{StaticResource SuccessHoverBrush}" />
     </Style>
 
-    <Style x:Key="SuccessButton" Selector="Button:disabled">
+    <Style Selector="Button.SuccessButton:disabled">
         <Setter Property="Opacity" Value="0.4" />
         <Setter Property="Cursor" Value="Arrow" />
     </Style>
 
     <!-- Secondary Button Style (Ghost/Outline) -->
-    <Style x:Key="SecondaryButton" Selector="Button">
+    <Style Selector="Button.SecondaryButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
@@ -112,13 +115,13 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="SecondaryButton" Selector="Button:pointerover">
+    <Style Selector="Button.SecondaryButton:pointerover">
         <Setter Property="Background" Value="#F5F5F5" />
         <Setter Property="BorderBrush" Value="{StaticResource TextSecondaryBrush}" />
     </Style>
 
     <!-- Danger Button Style -->
-    <Style x:Key="DangerButton" Selector="Button">
+    <Style Selector="Button.DangerButton">
         <Setter Property="Background" Value="{StaticResource DangerBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderThickness" Value="0" />
@@ -129,12 +132,12 @@
         <Setter Property="Cursor" Value="Hand" />
     </Style>
 
-    <Style x:Key="DangerButton" Selector="Button:pointerover">
+    <Style Selector="Button.DangerButton:pointerover">
         <Setter Property="Background" Value="{StaticResource DangerHoverBrush}" />
     </Style>
 
     <!-- Icon Button Style (Settings, etc.) -->
-    <Style x:Key="IconButton" Selector="Button">
+    <Style Selector="Button.IconButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -145,13 +148,13 @@
         <Setter Property="Cursor" Value="Hand" />
     </Style>
 
-    <Style x:Key="IconButton" Selector="Button:pointerover">
+    <Style Selector="Button.IconButton:pointerover">
         <Setter Property="Background" Value="#F5F5F5" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
     </Style>
 
     <!-- Modern TextBox Style -->
-    <Style x:Key="ModernTextBox" Selector="TextBox">
+    <Style Selector="TextBox.ModernTextBox">
         <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
@@ -162,16 +165,16 @@
         <Setter Property="MinHeight" Value="42" />
     </Style>
 
-    <Style x:Key="ModernTextBox" Selector="TextBox:focus">
+    <Style Selector="TextBox.ModernTextBox:focus">
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
     </Style>
 
-    <Style x:Key="ModernTextBox" Selector="TextBox:pointerover">
+    <Style Selector="TextBox.ModernTextBox:pointerover /template/ Border#PART_BorderElement">
         <Setter Property="BorderBrush" Value="{StaticResource TextSecondaryBrush}" />
     </Style>
 
     <!-- Modern ComboBox Style -->
-    <Style x:Key="ModernComboBox" Selector="ComboBox">
+    <Style Selector="ComboBox.ModernComboBox">
         <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
@@ -183,48 +186,48 @@
     </Style>
 
     <!-- Modern CheckBox Style -->
-    <Style x:Key="ModernCheckBox" Selector="CheckBox">
+    <Style Selector="CheckBox.ModernCheckBox">
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Medium" />
     </Style>
 
-    <!-- Label/Header Styles -->
-    <Style x:Key="HeaderLarge" Selector="TextBlock">
+    <!-- Typography Styles -->
+    <Style Selector="TextBlock.HeaderLarge">
         <Setter Property="FontSize" Value="28" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
     </Style>
 
-    <Style x:Key="HeaderMedium" Selector="TextBlock">
+    <Style Selector="TextBlock.HeaderMedium">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
     </Style>
 
-    <Style x:Key="HeaderSmall" Selector="TextBlock">
+    <Style Selector="TextBlock.HeaderSmall">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
     </Style>
 
-    <Style x:Key="BodyText" Selector="TextBlock">
+    <Style Selector="TextBlock.BodyText">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
     </Style>
 
-    <Style x:Key="SecondaryText" Selector="TextBlock">
+    <Style Selector="TextBlock.SecondaryText">
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
     </Style>
 
-    <Style x:Key="LabelText" Selector="TextBlock">
+    <Style Selector="TextBlock.LabelText">
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
         <Setter Property="Margin" Value="0,0,0,6" />
     </Style>
 
-</ResourceDictionary>
+</Styles>
